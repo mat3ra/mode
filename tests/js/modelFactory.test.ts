@@ -74,6 +74,29 @@ describe("ModelFactory", () => {
         );
     });
 
+    it("uses an unknown method when the application has no model tree", () => {
+        testCasesFromApplication
+            .filter(({ expectedType }) => expectedType === "unknown")
+            .forEach(({ app }) => {
+                const model = ModelFactory.createFromApplication({ application: app });
+
+                expect(model.isUnknown).to.equal(true);
+                expect(model.Method.type).to.equal("unknown");
+                expect(model.Method.subtype).to.equal("unknown");
+            });
+    });
+
+    it("keeps an explicit method when the application has no model tree", () => {
+        const model = ModelFactory.createFromApplication({
+            application: { name: "python", version: "3.11.10" },
+            method: { type: "pseudopotential", subtype: "us" },
+        });
+
+        expect(model.isUnknown).to.equal(true);
+        expect(model.Method.type).to.equal("pseudopotential");
+        expect(model.Method.subtype).to.equal("us");
+    });
+
     it("throws error if application is not provided", () => {
         expect(() => {
             ModelFactory.createFromApplication({} as any);
