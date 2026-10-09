@@ -13,6 +13,7 @@ import type {
 } from "@mat3ra/esse/dist/js/types";
 import lodash from "lodash";
 
+import { UnknownMethodConfig } from "./default_methods";
 import { DFTModelConfig } from "./default_models";
 import { type ModelSchemaMixin, modelSchemaMixin } from "./generated/ModelSchemaMixin";
 import { Method } from "./method";
@@ -41,7 +42,13 @@ export class Model extends InMemoryEntity<ModelEntity> implements BaseModel {
     protected _method?: Method;
 
     constructor(config: ModelConfig) {
-        const { application, method = Method.defaultConfig, ...entityConfig } = config;
+        const { application, method: methodFromConfig, ...entityConfig } = config;
+        // Method.defaultConfig is a pseudopotential method. An unknown model has no method tree,
+        // so it must not inherit that default or the workflow designer offers pseudopotential
+        // selection for applications that have no model.
+        const method =
+            methodFromConfig ??
+            (config.type === "unknown" ? UnknownMethodConfig : Method.defaultConfig);
         super({ ...entityConfig, method } as ModelEntity);
         this._application = application;
         this._MethodFactory = MethodFactory;
