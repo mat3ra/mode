@@ -1,7 +1,10 @@
 import { InMemoryEntity } from "@mat3ra/code/dist/js/entity";
 import type { BaseInMemoryEntitySchema, BaseModel } from "@mat3ra/esse/dist/js/types";
 
-export type ModelSchemaMixin = BaseModel;
+export type ModelSchemaMixin = Omit<BaseModel, "method"> & {
+    get method(): BaseModel["method"];
+    set method(value: BaseModel["method"] | InMemoryEntity);
+};
 
 export type ModelInMemoryEntity = InMemoryEntity<BaseInMemoryEntitySchema & ModelSchemaMixin>;
 
@@ -10,26 +13,23 @@ export function modelSchemaMixin<T extends InMemoryEntity>(
 ): asserts item is T & ModelSchemaMixin {
     // @ts-expect-error
     const properties: InMemoryEntity<ModelSchemaMixin> & ModelSchemaMixin = {
-        get type() {
+        get type(): BaseModel["type"] {
             return this.requiredProp("type");
         },
         set type(value: BaseModel["type"]) {
             this.setProp("type", value);
         },
-        get subtype() {
+        get subtype(): BaseModel["subtype"] {
             return this.requiredProp("subtype");
         },
         set subtype(value: BaseModel["subtype"]) {
             this.setProp("subtype", value);
         },
-        get method() {
+        get method(): BaseModel["method"] {
             return this.requiredProp("method");
         },
-        set method(value: BaseModel["method"]) {
-            this.setProp(
-                "method",
-                value instanceof InMemoryEntity ? InMemoryEntity.getDataForEntity(value) : value,
-            );
+        set method(value: BaseModel["method"] | InMemoryEntity) {
+            this.setProp("method", InMemoryEntity.getDataForEntity(value));
         },
     };
 
