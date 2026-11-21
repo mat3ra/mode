@@ -90,6 +90,14 @@ describe("Model", () => {
         expect(model.method).to.have.nested.property("data.searchText", "Si");
     });
 
+    it("a change made on one default model's Method is not in another's", () => {
+        new Model({ type: "dft", subtype: "gga" }).Method.setSearchText("Si");
+
+        expect(new Model({ type: "dft", subtype: "gga" }).method).to.not.have.nested.property(
+            "data.searchText",
+        );
+    });
+
     it("calculateHash matches fixture", () => {
         const fixture = JSON.parse(
             readFileSync(resolve(__dirname, "../fixtures/model_hash.json"), "utf-8"),
