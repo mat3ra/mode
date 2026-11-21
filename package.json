@@ -55,7 +55,7 @@
     "devDependencies": {
         "@exabyte-io/eslint-config": "2025.5.13-0",
         "@mat3ra/code": "2026.8.18-0",
-        "@mat3ra/esse": "2026.8.18-2",
+        "@mat3ra/esse": "https://github.com/mat3ra/esse/releases/download/wip-b4b4626/esse.tgz",
         "@mat3ra/prode": "2026.8.18-0",
         "@mat3ra/standata": "2026.5.28-0",
         "@mat3ra/tsconfig": "2024.6.3-0",
