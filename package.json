@@ -54,7 +54,7 @@
     },
     "devDependencies": {
         "@exabyte-io/eslint-config": "2025.5.13-0",
-        "@mat3ra/code": "https://github.com/mat3ra/code/releases/download/wip-cd14a6a/code.tgz",
+        "@mat3ra/code": "https://github.com/mat3ra/code/releases/download/wip-1c11393/code.tgz",
         "@mat3ra/esse": "2026.8.18-2",
         "@mat3ra/prode": "2026.8.18-0",
         "@mat3ra/standata": "2026.5.28-0",

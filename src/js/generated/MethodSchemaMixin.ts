@@ -26,13 +26,13 @@ export function methodSchemaMixin<T extends InMemoryEntity>(
             return this.prop("precision");
         },
         set precision(value: BaseMethod["precision"]) {
-            this.setProp("precision", InMemoryEntity.getDataForEntity(value));
+            this.setProp("precision", InMemoryEntity.toStoredData(value));
         },
         get data() {
             return this.prop("data");
         },
         set data(value: BaseMethod["data"]) {
-            this.setProp("data", InMemoryEntity.getDataForEntity(value));
+            this.setProp("data", InMemoryEntity.toStoredData(value));
         },
     };
 

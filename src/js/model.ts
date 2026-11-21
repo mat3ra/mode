@@ -105,7 +105,7 @@ export class Model extends InMemoryEntity<ModelEntity> implements BaseModel {
     }
 
     get Method(): Method {
-        return InMemoryEntity.getEntityForData(this.method, (data) =>
+        return InMemoryEntity.getOrCreateEntity(this.method, (data) =>
             this._MethodFactory.create(data),
         );
     }

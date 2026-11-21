@@ -26,7 +26,7 @@ export function modelSchemaMixin<T extends InMemoryEntity>(
             return this.requiredProp("method");
         },
         set method(value: BaseModel["method"]) {
-            this.setProp("method", InMemoryEntity.getDataForEntity(value));
+            this.setProp("method", InMemoryEntity.toStoredData(value));
         },
     };
 
