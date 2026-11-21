@@ -78,6 +78,18 @@ describe("Model", () => {
         });
     });
 
+    it("a change made on Method is in the method data", () => {
+        const model = new Model({
+            type: "dft",
+            subtype: "gga",
+            method: { type: "pseudopotential", subtype: "us" },
+        });
+
+        model.Method.setSearchText("Si");
+
+        expect(model.method).to.have.nested.property("data.searchText", "Si");
+    });
+
     it("calculateHash matches fixture", () => {
         const fixture = JSON.parse(
             readFileSync(resolve(__dirname, "../fixtures/model_hash.json"), "utf-8"),

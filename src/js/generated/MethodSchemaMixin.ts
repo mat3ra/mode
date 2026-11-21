@@ -1,4 +1,4 @@
-import type { InMemoryEntity } from "@mat3ra/code/dist/js/entity";
+import { InMemoryEntity } from "@mat3ra/code/dist/js/entity";
 import type { BaseInMemoryEntitySchema, BaseMethod } from "@mat3ra/esse/dist/js/types";
 
 export type MethodSchemaMixin = BaseMethod;
@@ -26,13 +26,19 @@ export function methodSchemaMixin<T extends InMemoryEntity>(
             return this.prop("precision");
         },
         set precision(value: BaseMethod["precision"]) {
-            this.setProp("precision", value);
+            this.setProp(
+                "precision",
+                value instanceof InMemoryEntity ? InMemoryEntity.getDataForEntity(value) : value,
+            );
         },
         get data() {
             return this.prop("data");
         },
         set data(value: BaseMethod["data"]) {
-            this.setProp("data", value);
+            this.setProp(
+                "data",
+                value instanceof InMemoryEntity ? InMemoryEntity.getDataForEntity(value) : value,
+            );
         },
     };
 

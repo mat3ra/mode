@@ -39,7 +39,7 @@ export class Model extends InMemoryEntity<ModelEntity> implements BaseModel {
 
     protected _MethodFactory: typeof MethodFactory;
 
-    protected _method?: Method;
+    static _isDeepCloneRequired = true;
 
     constructor(config: ModelConfig) {
         const { application, method: methodFromConfig, ...entityConfig } = config;
@@ -52,7 +52,6 @@ export class Model extends InMemoryEntity<ModelEntity> implements BaseModel {
         super({ ...entityConfig, method } as ModelEntity);
         this._application = application;
         this._MethodFactory = MethodFactory;
-        this.method = method || this.method;
     }
 
     setSubtype(subtype: SlugifiedEntryOrSlug): void {
@@ -106,15 +105,13 @@ export class Model extends InMemoryEntity<ModelEntity> implements BaseModel {
     }
 
     get Method(): Method {
-        if (!this._method) {
-            this._method = this._MethodFactory.create(this.method);
-        }
-        return this._method;
+        return InMemoryEntity.getEntityForData(this.method, (data) =>
+            this._MethodFactory.create(data),
+        );
     }
 
     setMethod(method: Method): void {
-        this._method = method;
-        this.setProp("method", method.toJSON());
+        this.method = method;
     }
 
     get methodsFromTree(): Record<string, string[]> {
