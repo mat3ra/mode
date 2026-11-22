@@ -20,7 +20,7 @@ npm install @mat3ra/mode
 For development:
 
 ```bash
-git clone https://github.com/Exabyte-io/mode.git
+git clone https://github.com/mat3ra/mode.git
 ```
 
 
@@ -31,7 +31,7 @@ This repository is an [open-source](LICENSE.md) work-in-progress and we welcome 
 We regularly deploy the latest code containing all accepted contributions online as part of the
 [Mat3ra.com](https://mat3ra.com) platform, so contributors will see their code in action there.
 
-See [ESSE](https://github.com/Exabyte-io/esse) for additional context regarding the data schemas used here.
+See [ESSE](https://github.com/mat3ra/esse) for additional context regarding the data schemas used here.
 
 Useful commands for development:
 
@@ -51,7 +51,7 @@ npm run test
 
 #### How to Add New Models and Methods
 
-!NOTE: this section is moved to [@mat3ra/standata](github.com/Exabyte-io/standata).
+!NOTE: this section is moved to [@mat3ra/standata](github.com/mat3ra/standata).
 
 The list of model and method entities is compiled from Yaml assets located in the `./assets` directory
 using the `build_entities.js` script. The assets processed by this script usually involve custom Yaml
@@ -77,7 +77,7 @@ config:
   tags:
     - example_model
     - tutorial
-  schema: !esse 'schema-id-placeholder' # add a schema using the !esse type to validate each configuration 
+  schema: !esse 'schema-id-placeholder' # add a schema using the !esse type to validate each configuration
 ```
 
 The above asset file will create four model configurations, "Model-A", "Model-B", "Model-C",
@@ -86,5 +86,5 @@ There are a few more options available to customize the entity asset, for instan
 has an `exclusions` property where conflicting pairs of entity properties can be defined, so that
 combinations of those will be avoided.
 
-For more examples, please see the asset files in `./assets` or [code.js](https://github.com/Exabyte-io/code.js)
+For more examples, please see the asset files in `./assets` or [code.js](https://github.com/mat3ra/code.js)
 for the definition of Yaml types such as `!combine` or `!parameter`.
